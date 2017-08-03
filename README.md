@@ -153,44 +153,44 @@ messageType = "modal";
 // caso o valor seja "rewrite" novamente, mensagens de erros irão sobrescrever o formulário
 // caso contrário, dá uma segunda opção de tipo de mensagem
 // !! configuração necessária apenas se o valor de messageType for "rewrite" !!
-rewriteOnFailure: "modal",
+rewriteOnFailure: "modal";
 
 // @configParam successMessage
 // {String} mensagem de sucesso
-successMessage: $("<p>Envio realizado com sucesso</p>").html(),
+successMessage: $("<p>Envio realizado com sucesso</p>").html();
 
 // @configParam successCallback
 // {Function} callback de successo
 // -- É disparado quando houver sucesso no envio do formulário
 successCallback: (mensagem = this.configParams.successMessage) => {
     this.showMessage(mensagem);
-},
+};
 
 // @configParam failureMessage
 // {String} mensagem de erro
-failureMessage: $("<p>Ocorreu uma falha ao realizar o envio</p>").html(),
+failureMessage: $("<p>Ocorreu uma falha ao realizar o envio</p>").html();
 
 // @configParam failureCallback
 // {Function} callback de erro
 // -- É disparado quando houver erro no envio do formulário
 failureCallback: (mensagem = this.configParams.failureMessage) => {
     this.showMessage(mensagem);
-},
+};
 
 // @configParam warningMessage
 // {String} mensagem de alerta
-warningMessage: $("<p>O formul&aacute;rio retornou um alerta</p>").html(),
+warningMessage: $("<p>O formul&aacute;rio retornou um alerta</p>").html();
 
 // @configParam warningCallback
 // {Function} callback de alerta
 // -- É disparado quando houver um alerta no envio do formulário
 warningCallback: (warning = this.configParams.warningMessage) => {
     console.log(warning);
-},
+};
 
 // @confiParam invalidFieldMessage
 // {String} mensagem padrão para quando há campos inválidos
-invalidFieldMessage: $("<p>Existem campos inv&aacute;lidos. Revise-os e tente novamente.</p>").html()
+invalidFieldMessage: $("<p>Existem campos inv&aacute;lidos. Revise-os e tente novamente.</p>").html();
 
 ```
 
@@ -219,3 +219,38 @@ O padrão de mensagem via `jQuery.html()` é para assegurar caracteres especiais
 ```
 
 Neste exemplo, a messagem de sucesso será exibida no corpo do elemento form, apagando os campos, e depois de 10 segundos a página será atualizada. Note que a função precisou ser escrita em formato ES5 pois o código está no HTML e não poderá ser compilado.
+
+
+## Configuração após sucesso
+
+As configurações abaixo descrevem o comportamento do formulário após um envio que não retornou erro.
+
+```javascript
+// @configParam resetOnSuccess
+// {Boolean} se o form vai ser resetado no sucesso de envio
+resetOnSuccess: true;
+
+// @configParam showSubmitAfterSuccess
+// {Boolean} se o botão de envio vai ser exibido de volta após o sucesso
+showSubmitAfterSuccess: true;
+
+// @configParam hideLoadingAfterSuccess
+// {Boolean} se o loading vai ser escondido após o sucesos
+// recomendado o false em caso de formulários que efetuam redirect no sucesso
+hideLoadingAfterSuccess: true;
+```
+
+## Adicionando funcionalidades ao formulário
+
+Caso seja necessário adicionar funcionalidades específicas no formulário ou página, é possível usá-las na função reservada `extend_config`, que é chamada durante a inicialização da classe. No exemplo abaixo, é aplicado o Spacelab Placeholder e uma máscara em um campo.
+
+```javascript
+class Contato extends Form {
+ ...
+ extend_config(){
+  new Placeholder;
+
+  $("#cmpTelefone").inputmask(["(99) 9999-9999", "(99) 99999-9999"]);
+ }
+}
+```
