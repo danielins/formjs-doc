@@ -146,7 +146,7 @@ O Form.js auxilia no recebimento e exibição de mensagens após o envio do form
 // - inline: mensagem aparece no topo do formulário
 // - rewrite: o form é apagado e a mensagem aparece em seu lugar
 // Se for colocado um valor diferente dos citados, será usado o valor padrão "modal"
-messageType = "modal";
+messageType: "modal";
 
 // @configParam rewriteOnFailure
 // {String} se a mensagem deve apagar o formulário em caso de erro/falha
