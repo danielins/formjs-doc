@@ -177,17 +177,6 @@ failureCallback: (mensagem = this.configParams.failureMessage) => {
     this.showMessage(mensagem);
 };
 
-// @configParam warningMessage
-// {String} mensagem de alerta
-warningMessage: $("<p>O formul&aacute;rio retornou um alerta</p>").html();
-
-// @configParam warningCallback
-// {Function} callback de alerta
-// -- É disparado quando houver um alerta no envio do formulário
-warningCallback: (warning = this.configParams.warningMessage) => {
-    console.log(warning);
-};
-
 // @confiParam invalidFieldMessage
 // {String} mensagem padrão para quando há campos inválidos
 invalidFieldMessage: $("<p>Existem campos inv&aacute;lidos. Revise-os e tente novamente.</p>").html();
@@ -242,7 +231,7 @@ hideLoadingAfterSuccess: true;
 
 ## Adicionando funcionalidades ao formulário
 
-Caso seja necessário adicionar funcionalidades específicas no formulário ou página, é possível usá-las na função reservada `extend_config`, que é chamada durante a inicialização da classe. No exemplo abaixo, é aplicado o Spacelab Placeholder e uma máscara em um campo.
+Caso seja necessário adicionar funcionalidades específicas no formulário ou página, é possível usá-las na função reservada `extend_config`, que é chamada durante a inicialização da classe. No exemplo abaixo, é aplicado o Spacelab Placeholder, uma máscara em um campo e é chamado um novo método `map()`, que foi declarado em seguida.
 
 ```javascript
 class Contato extends Form {
@@ -251,6 +240,11 @@ class Contato extends Form {
   new Placeholder;
 
   $("#cmpTelefone").inputmask(["(99) 9999-9999", "(99) 99999-9999"]);
+  
+  this.map();
+ }
+ map(){
+  ...
  }
 }
 ```
